@@ -8,7 +8,7 @@
         <!--Movies View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="MoviesViewController" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MoviesViewController" customModule="Flicks" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -47,7 +47,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="overviewLabel" destination="8FU-GY-TY9" id="Gfc-ad-JB0"/>
-                                            <outlet property="posterView" destination="Aze-Gw-JmA" id="llG-7p-RjO"/>
+                                            <outlet property="posterView" destination="Aze-Gw-JmA" id="VvI-TB-R0q"/>
                                             <outlet property="titleLabel" destination="3HR-2e-FVO" id="7qH-Ja-Dzx"/>
                                         </connections>
                                     </tableViewCell>
