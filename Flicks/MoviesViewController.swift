@@ -8,17 +8,33 @@
 
 import UIKit
 import AFNetworking
+import SOTProgressHUD
 
-class MoviesViewController: UIViewController,UITableViewDataSource, UITableViewDelegate {
+class MoviesViewController: UIViewController,UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
     
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     var movies: [NSDictionary]?
+    var filteredMovies: [NSDictionary]?
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        SOTProgressHUD.sharedHUD.show(self.view)
+        filteredMovies = movies
         tableView.dataSource = self
         tableView.delegate = self
+        searchBar.delegate = self
+        
+        
+        
         // Do any additional setup after loading the view.
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
+        tableView.insertSubview(refreshControl, atIndex: 0)
+        
         
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
         let url = NSURL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
@@ -36,11 +52,14 @@ class MoviesViewController: UIViewController,UITableViewDataSource, UITableViewD
                         data, options:[]) as? NSDictionary {
                             NSLog("response: \(responseDictionary)")
                             self.movies = responseDictionary["results"] as! [NSDictionary]
+                            self.filteredMovies = self.movies
                             self.tableView.reloadData()
                     }
                 }
         })
+        
         task.resume()
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -49,8 +68,8 @@ class MoviesViewController: UIViewController,UITableViewDataSource, UITableViewD
     }
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        if let movies = movies {
-            return movies.count
+        if let filteredMovies = filteredMovies {
+            return filteredMovies.count
         }else {
             return 0
         }
@@ -58,7 +77,7 @@ class MoviesViewController: UIViewController,UITableViewDataSource, UITableViewD
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
         
-        let movie = movies![indexPath.row]
+        let movie = filteredMovies![indexPath.row]
         
         let title = movie["title"] as! String
         let overview = movie["overview"] as! String
@@ -81,19 +100,56 @@ class MoviesViewController: UIViewController,UITableViewDataSource, UITableViewD
             // that you include as an asset
             cell.posterView.image = nil
         }
+        SOTProgressHUD.sharedHUD.dismiss()
         return cell
         
     }
     
+    func refreshControlAction(refreshControl: UIRefreshControl) {
+        let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
+        let url = NSURL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
+        let request = NSURLRequest(URL: url!)
+        
+        let session = NSURLSession(
+            configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
+            delegate:nil,
+            delegateQueue:NSOperationQueue.mainQueue()
+        )
+        let task : NSURLSessionDataTask = session.dataTaskWithRequest(request,
+            completionHandler: { (data, response, error) in
+                
+                // ... Use the new data to update the data source ...
+                
+                // Reload the tableView now that there is new data
+                self.tableView.reloadData()
+                // Tell the refreshControl to stop spinning
+                refreshControl.endRefreshing()
+        });
+        task.resume()
     
-    /*
-    // MARK: - Navigation
-    
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    // Get the new view controller using segue.destinationViewController.
-    // Pass the selected object to the new view controller.
     }
-    */
     
+    
+    
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.text = ""
+        searchBar.resignFirstResponder()
+        filteredMovies = movies
+        tableView.reloadData()
+        
+    }
+    
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        self.searchBar.showsCancelButton = true
+    }
+
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        
+            filteredMovies = searchText.isEmpty ? movies : movies!.filter({(movie: NSDictionary) -> Bool in
+                return (movie["title"] as! String).rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil
+            })
+            tableView.reloadData()
+    }
 }

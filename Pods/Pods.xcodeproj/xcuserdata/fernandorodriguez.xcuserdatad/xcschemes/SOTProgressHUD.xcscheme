@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '590C21B877D5356A73FE1528'
-               BlueprintName = 'AFNetworking'
+               BlueprintIdentifier = 'DC1B960416145A2A23FBE318'
+               BlueprintName = 'SOTProgressHUD'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'AFNetworking.framework'>
+               BuildableName = 'SOTProgressHUD.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
