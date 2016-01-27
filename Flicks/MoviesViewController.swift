@@ -11,7 +11,6 @@ import AFNetworking
 import SOTProgressHUD
 
 class MoviesViewController: UIViewController,UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
-    
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     var movies: [NSDictionary]?
@@ -19,10 +18,15 @@ class MoviesViewController: UIViewController,UITableViewDataSource, UITableViewD
     
     
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        
+        //LightContent
+        return UIStatusBarStyle.LightContent
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        SOTProgressHUD.sharedHUD.show(self.view)
+        
         filteredMovies = movies
         tableView.dataSource = self
         tableView.delegate = self
@@ -30,35 +34,13 @@ class MoviesViewController: UIViewController,UITableViewDataSource, UITableViewD
         
         
         
+        netRequest()
+        
         // Do any additional setup after loading the view.
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
         tableView.insertSubview(refreshControl, atIndex: 0)
         
-        
-        let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let url = NSURL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
-        let request = NSURLRequest(URL: url!)
-        let session = NSURLSession(
-            configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
-            delegate: nil,
-            delegateQueue: NSOperationQueue.mainQueue()
-        )
-        
-        let task: NSURLSessionDataTask = session.dataTaskWithRequest(request,
-            completionHandler: { (dataOrNil, response, error) in
-                if let data = dataOrNil {
-                    if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
-                        data, options:[]) as? NSDictionary {
-                            NSLog("response: \(responseDictionary)")
-                            self.movies = responseDictionary["results"] as! [NSDictionary]
-                            self.filteredMovies = self.movies
-                            self.tableView.reloadData()
-                    }
-                }
-        })
-        
-        task.resume()
         
     }
     
@@ -100,33 +82,42 @@ class MoviesViewController: UIViewController,UITableViewDataSource, UITableViewD
             // that you include as an asset
             cell.posterView.image = nil
         }
-        SOTProgressHUD.sharedHUD.dismiss()
+        
         return cell
         
     }
     
     func refreshControlAction(refreshControl: UIRefreshControl) {
+       //do!
+        netRequest()
+        refreshControl.endRefreshing()
+    
+    }
+    func netRequest (){
+        SOTProgressHUD.sharedHUD.show(self.view)
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
         let url = NSURL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
         let request = NSURLRequest(URL: url!)
-        
         let session = NSURLSession(
             configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
-            delegate:nil,
-            delegateQueue:NSOperationQueue.mainQueue()
+            delegate: nil,
+            delegateQueue: NSOperationQueue.mainQueue()
         )
-        let task : NSURLSessionDataTask = session.dataTaskWithRequest(request,
-            completionHandler: { (data, response, error) in
-                
-                // ... Use the new data to update the data source ...
-                
-                // Reload the tableView now that there is new data
-                self.tableView.reloadData()
-                // Tell the refreshControl to stop spinning
-                refreshControl.endRefreshing()
-        });
+        
+        let task: NSURLSessionDataTask = session.dataTaskWithRequest(request,
+            completionHandler: { (dataOrNil, response, error) in
+                if let data = dataOrNil {
+                    if let responseDictionary = try! NSJSONSerialization.JSONObjectWithData(
+                        data, options:[]) as? NSDictionary {
+                            self.movies = responseDictionary["results"] as! [NSDictionary]
+                            self.filteredMovies = self.movies
+                            self.tableView.reloadData()
+                            SOTProgressHUD.sharedHUD.dismiss()
+                    }
+                }
+        })
+        
         task.resume()
-    
     }
     
     
