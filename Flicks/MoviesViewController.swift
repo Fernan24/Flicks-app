@@ -10,13 +10,12 @@ import UIKit
 import AFNetworking
 import SOTProgressHUD
 
-class MoviesViewController: UIViewController,UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate {
+class MoviesViewController: UIViewController, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var tableView: UITableView!
     var movies: [NSDictionary]?
     var filteredMovies: [NSDictionary]?
-    
-    
+
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         
@@ -28,9 +27,12 @@ class MoviesViewController: UIViewController,UITableViewDataSource, UITableViewD
         super.viewDidLoad()
         
         filteredMovies = movies
-        tableView.dataSource = self
-        tableView.delegate = self
+        collectionView.dataSource = self
+        collectionView.delegate = self
         searchBar.delegate = self
+        
+        
+        
         
         
         
@@ -39,7 +41,8 @@ class MoviesViewController: UIViewController,UITableViewDataSource, UITableViewD
         // Do any additional setup after loading the view.
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
-        tableView.insertSubview(refreshControl, atIndex: 0)
+        collectionView.insertSubview(refreshControl, atIndex: 0)
+        
         
         
     }
@@ -48,45 +51,8 @@ class MoviesViewController: UIViewController,UITableViewDataSource, UITableViewD
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        if let filteredMovies = filteredMovies {
-            return filteredMovies.count
-        }else {
-            return 0
-        }
-    }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("MovieCell", forIndexPath: indexPath) as! MovieCell
-        
-        let movie = filteredMovies![indexPath.row]
-        
-        let title = movie["title"] as! String
-        let overview = movie["overview"] as! String
-        let posterPath = movie["poster_path"] as! String
-        
-        let baseUrl = "http://image.tmdb.org/t/p/w500"
-        let imgUrl = NSURL(string: baseUrl + posterPath)
-        
-        
-        
-        cell.titleLabel.text = title
-        cell.overviewLabel.text = overview
-        if let posterPath = movie["poster_path"] as? String {
-            let posterBaseUrl = "http://image.tmdb.org/t/p/w500"
-            let posterUrl = NSURL(string: posterBaseUrl + posterPath)
-            cell.posterView.setImageWithURL(posterUrl!)
-        }
-        else {
-            // No poster image. Can either set to nil (no image) or a default movie poster image
-            // that you include as an asset
-            cell.posterView.image = nil
-        }
-        
-        return cell
-        
-    }
     
+        
     func refreshControlAction(refreshControl: UIRefreshControl) {
        //do!
         netRequest()
@@ -111,7 +77,7 @@ class MoviesViewController: UIViewController,UITableViewDataSource, UITableViewD
                         data, options:[]) as? NSDictionary {
                             self.movies = responseDictionary["results"] as! [NSDictionary]
                             self.filteredMovies = self.movies
-                            self.tableView.reloadData()
+                            self.collectionView.reloadData()
                             SOTProgressHUD.sharedHUD.dismiss()
                     }
                 }
@@ -128,7 +94,7 @@ class MoviesViewController: UIViewController,UITableViewDataSource, UITableViewD
         searchBar.text = ""
         searchBar.resignFirstResponder()
         filteredMovies = movies
-        tableView.reloadData()
+        collectionView.reloadData()
         
     }
     
@@ -141,6 +107,41 @@ class MoviesViewController: UIViewController,UITableViewDataSource, UITableViewD
             filteredMovies = searchText.isEmpty ? movies : movies!.filter({(movie: NSDictionary) -> Bool in
                 return (movie["title"] as! String).rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil
             })
-            tableView.reloadData()
+            collectionView.reloadData()
     }
+    let totalColors: Int = 100
+   
+    
+        func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+            if let filteredMovies = filteredMovies {
+                return filteredMovies.count
+            }else {
+                return 0
+            }
+        }
+        
+        func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+            let cell = collectionView.dequeueReusableCellWithReuseIdentifier("postercell", forIndexPath: indexPath) as! ColorCell
+            let movie = filteredMovies![indexPath.row]
+            
+            let posterPath = movie["poster_path"] as! String
+            
+            
+            
+            
+            if let posterPath = movie["poster_path"] as? String {
+                let posterBaseUrl = "http://image.tmdb.org/t/p/w500"
+                let posterUrl = NSURL(string: posterBaseUrl + posterPath)
+                cell.moviePosterView.setImageWithURL(posterUrl!)
+            }
+            else {
+                // No poster image. Can either set to nil (no image) or a default movie poster image
+                // that you include as an asset
+                cell.moviePosterView.image = nil
+            }
+            
+            return cell
+            
+        }
+    
 }
