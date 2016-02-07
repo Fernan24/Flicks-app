@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'D2A88F1C6766D8E3DE8D600A'
+               BlueprintIdentifier = '63C1F530C125F7572A3F52F0'
                BlueprintName = 'SOTProgressHUD-SOTProgressHUDAssets'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'SOTProgressHUDAssets.bundle'>

@@ -15,7 +15,7 @@ class MoviesViewController: UIViewController, UISearchBarDelegate, UICollectionV
     @IBOutlet weak var searchBar: UISearchBar!
     var movies: [NSDictionary]?
     var filteredMovies: [NSDictionary]?
-
+    var endpoint:String = ""
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         
@@ -62,7 +62,7 @@ class MoviesViewController: UIViewController, UISearchBarDelegate, UICollectionV
     func netRequest (){
         SOTProgressHUD.sharedHUD.show(self.view)
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
-        let url = NSURL(string: "https://api.themoviedb.org/3/movie/now_playing?api_key=\(apiKey)")
+        let url = NSURL(string: "https://api.themoviedb.org/3/movie/\(endpoint)?api_key=\(apiKey)")
         let request = NSURLRequest(URL: url!)
         let session = NSURLSession(
             configuration: NSURLSessionConfiguration.defaultSessionConfiguration(),
@@ -124,24 +124,24 @@ class MoviesViewController: UIViewController, UISearchBarDelegate, UICollectionV
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("postercell", forIndexPath: indexPath) as! ColorCell
             let movie = filteredMovies![indexPath.row]
             
-            let posterPath = movie["poster_path"] as! String
             
             
-            
+            let posterBaseUrl = "http://image.tmdb.org/t/p/w500"
             
             if let posterPath = movie["poster_path"] as? String {
-                let posterBaseUrl = "http://image.tmdb.org/t/p/w500"
                 let posterUrl = NSURL(string: posterBaseUrl + posterPath)
                 cell.moviePosterView.setImageWithURL(posterUrl!)
             }
-            else {
-                // No poster image. Can either set to nil (no image) or a default movie poster image
-                // that you include as an asset
-                cell.moviePosterView.image = nil
-            }
-            
             return cell
             
         }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let cell = sender as! UICollectionViewCell
+        let indexPath = collectionView.indexPathForCell(cell)
+        let movie = movies![indexPath!.row]
+        let detailViewController = segue.destinationViewController as! DetailViewController
+        detailViewController.movies = movie
+        
+    }
     
 }

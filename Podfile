@@ -6,5 +6,6 @@ use_frameworks!
 target 'Flicks' do
     pod 'AFNetworking'
     pod 'SOTProgressHUD'
+    pod 'YoutubeSourceParserKit'
 end
 

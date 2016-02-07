@@ -12,7 +12,15 @@
 		09315B7D1C53D44800E9AF18 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09315B7B1C53D44800E9AF18 /* Main.storyboard */; };
 		09315B7F1C53D44800E9AF18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09315B7E1C53D44800E9AF18 /* Assets.xcassets */; };
 		09315B821C53D44800E9AF18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09315B801C53D44800E9AF18 /* LaunchScreen.storyboard */; };
+		094B95B21C652B46003D3AD4 /* upcoming.png in Resources */ = {isa = PBXBuildFile; fileRef = 094B95AE1C652B46003D3AD4 /* upcoming.png */; };
+		094B95B31C652B46003D3AD4 /* top_rated.png in Resources */ = {isa = PBXBuildFile; fileRef = 094B95AF1C652B46003D3AD4 /* top_rated.png */; };
+		094B95B41C652B46003D3AD4 /* popular.png in Resources */ = {isa = PBXBuildFile; fileRef = 094B95B01C652B46003D3AD4 /* popular.png */; };
+		094B95B51C652B46003D3AD4 /* now_playing.png in Resources */ = {isa = PBXBuildFile; fileRef = 094B95B11C652B46003D3AD4 /* now_playing.png */; };
+		094DBEF31C6445EE00A1B358 /* gold_star2.png in Resources */ = {isa = PBXBuildFile; fileRef = 094DBEF21C6445EE00A1B358 /* gold_star2.png */; };
+		094DBEF71C64478900A1B358 /* YouTube-icon-full_color.png in Resources */ = {isa = PBXBuildFile; fileRef = 094DBEF61C64478900A1B358 /* YouTube-icon-full_color.png */; };
+		097EEC9E1C5F9AF20015F105 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 097EEC9D1C5F9AF20015F105 /* DetailViewController.swift */; };
 		09BAE2E31C5A921500314E6F /* ColorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09BAE2E21C5A921500314E6F /* ColorCell.swift */; };
+		09C94BBF1C64E666005EB96F /* TrailerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09C94BBE1C64E666005EB96F /* TrailerViewController.swift */; };
 		F4D83076331C256CF33865CB /* Pods_Flicks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 03AA88755891643019465690 /* Pods_Flicks.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,7 +33,15 @@
 		09315B7E1C53D44800E9AF18 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		09315B811C53D44800E9AF18 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		09315B831C53D44800E9AF18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		094B95AE1C652B46003D3AD4 /* upcoming.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = upcoming.png; sourceTree = "<group>"; };
+		094B95AF1C652B46003D3AD4 /* top_rated.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = top_rated.png; sourceTree = "<group>"; };
+		094B95B01C652B46003D3AD4 /* popular.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = popular.png; sourceTree = "<group>"; };
+		094B95B11C652B46003D3AD4 /* now_playing.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = now_playing.png; sourceTree = "<group>"; };
+		094DBEF21C6445EE00A1B358 /* gold_star2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gold_star2.png; sourceTree = "<group>"; };
+		094DBEF61C64478900A1B358 /* YouTube-icon-full_color.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "YouTube-icon-full_color.png"; sourceTree = "<group>"; };
+		097EEC9D1C5F9AF20015F105 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		09BAE2E21C5A921500314E6F /* ColorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorCell.swift; sourceTree = "<group>"; };
+		09C94BBE1C64E666005EB96F /* TrailerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrailerViewController.swift; sourceTree = "<group>"; };
 		2CB6D5029382BDBAF8C79A82 /* Pods-Flicks.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flicks.release.xcconfig"; path = "Pods/Target Support Files/Pods-Flicks/Pods-Flicks.release.xcconfig"; sourceTree = "<group>"; };
 		D74191C5C201F27C5ECF4D10 /* Pods-Flicks.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Flicks.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Flicks/Pods-Flicks.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -68,6 +84,12 @@
 				09315B771C53D44800E9AF18 /* AppDelegate.swift */,
 				09315B7B1C53D44800E9AF18 /* Main.storyboard */,
 				09315B7E1C53D44800E9AF18 /* Assets.xcassets */,
+				094B95AE1C652B46003D3AD4 /* upcoming.png */,
+				094B95AF1C652B46003D3AD4 /* top_rated.png */,
+				094B95B01C652B46003D3AD4 /* popular.png */,
+				094B95B11C652B46003D3AD4 /* now_playing.png */,
+				094DBEF21C6445EE00A1B358 /* gold_star2.png */,
+				094DBEF61C64478900A1B358 /* YouTube-icon-full_color.png */,
 				09315B801C53D44800E9AF18 /* LaunchScreen.storyboard */,
 				09315B831C53D44800E9AF18 /* Info.plist */,
 			);
@@ -86,6 +108,8 @@
 			isa = PBXGroup;
 			children = (
 				091D60B61C5402C700B9DE2D /* MoviesViewController.swift */,
+				097EEC9D1C5F9AF20015F105 /* DetailViewController.swift */,
+				09C94BBE1C64E666005EB96F /* TrailerViewController.swift */,
 			);
 			name = VIewController;
 			sourceTree = "<group>";
@@ -170,7 +194,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				09315B821C53D44800E9AF18 /* LaunchScreen.storyboard in Resources */,
+				094B95B41C652B46003D3AD4 /* popular.png in Resources */,
 				09315B7F1C53D44800E9AF18 /* Assets.xcassets in Resources */,
+				094DBEF31C6445EE00A1B358 /* gold_star2.png in Resources */,
+				094B95B51C652B46003D3AD4 /* now_playing.png in Resources */,
+				094B95B21C652B46003D3AD4 /* upcoming.png in Resources */,
+				094B95B31C652B46003D3AD4 /* top_rated.png in Resources */,
+				094DBEF71C64478900A1B358 /* YouTube-icon-full_color.png in Resources */,
 				09315B7D1C53D44800E9AF18 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -233,6 +263,8 @@
 				09315B781C53D44800E9AF18 /* AppDelegate.swift in Sources */,
 				09BAE2E31C5A921500314E6F /* ColorCell.swift in Sources */,
 				091D60B71C5402C700B9DE2D /* MoviesViewController.swift in Sources */,
+				09C94BBF1C64E666005EB96F /* TrailerViewController.swift in Sources */,
+				097EEC9E1C5F9AF20015F105 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

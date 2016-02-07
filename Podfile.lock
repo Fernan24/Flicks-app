@@ -15,13 +15,16 @@ PODS:
   - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
   - SOTProgressHUD (0.1.0)
+  - YoutubeSourceParserKit (0.2.4)
 
 DEPENDENCIES:
   - AFNetworking
   - SOTProgressHUD
+  - YoutubeSourceParserKit
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   SOTProgressHUD: 1f2f6e6538bf109adeec14e30dcebcefaeb50927
+  YoutubeSourceParserKit: d1506222a62718ed41f18ab52ebbc1b1d9ecabcc
 
 COCOAPODS: 0.39.0

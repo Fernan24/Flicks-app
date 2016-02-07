@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'C576DAE06897319FEF55DF89'
-               BlueprintName = 'SOTProgressHUD'
+               BlueprintIdentifier = 'C42FD69C8F83E72A28230E28'
+               BlueprintName = 'YoutubeSourceParserKit'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'SOTProgressHUD.framework'>
+               BuildableName = 'YoutubeSourceParserKit.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
