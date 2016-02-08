@@ -76,21 +76,61 @@
                                 </constraints>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oyl-CF-LVF">
+                                <rect key="frame" x="0.0" y="-10" width="414" height="96.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Network Error" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9HW-tX-cQT">
+                                        <rect key="frame" x="139" y="18" width="136" height="26"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="136" id="McL-ML-DJQ"/>
+                                            <constraint firstAttribute="height" constant="21" id="apC-o9-0xI"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Connect your device to a network and relaunch the app." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jxE-MS-C1A">
+                                        <rect key="frame" x="8" y="52" width="398" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.21222594895287961" green="0.21222594895287961" blue="0.21222594895287961" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="jxE-MS-C1A" firstAttribute="leading" secondItem="oyl-CF-LVF" secondAttribute="leading" constant="8" id="7z1-QX-Y9A"/>
+                                    <constraint firstAttribute="bottom" secondItem="jxE-MS-C1A" secondAttribute="bottom" constant="23.5" id="8dz-zY-lNd"/>
+                                    <constraint firstAttribute="trailing" secondItem="jxE-MS-C1A" secondAttribute="trailing" constant="8" id="EZP-WL-cTk"/>
+                                    <constraint firstItem="jxE-MS-C1A" firstAttribute="top" secondItem="9HW-tX-cQT" secondAttribute="bottom" constant="8" id="Sfe-zA-cMe"/>
+                                    <constraint firstItem="9HW-tX-cQT" firstAttribute="top" secondItem="oyl-CF-LVF" secondAttribute="top" constant="18" id="Tdi-t0-VGd"/>
+                                    <constraint firstItem="9HW-tX-cQT" firstAttribute="centerX" secondItem="oyl-CF-LVF" secondAttribute="centerX" id="UoH-tX-Xtq"/>
+                                    <constraint firstItem="jxE-MS-C1A" firstAttribute="centerX" secondItem="oyl-CF-LVF" secondAttribute="centerX" id="azZ-rA-YtC"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="azZ-rA-YtC"/>
+                                    </mask>
+                                </variation>
+                            </view>
                         </subviews>
                         <constraints>
                             <constraint firstItem="ytv-FN-kCP" firstAttribute="top" secondItem="rcy-D6-cqh" secondAttribute="bottom" id="Br5-zR-RqQ"/>
                             <constraint firstItem="rJU-4f-WPH" firstAttribute="top" secondItem="ytv-FN-kCP" secondAttribute="bottom" constant="-64" id="IUK-a9-y7E"/>
+                            <constraint firstItem="oyl-CF-LVF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="KjF-aM-VXx"/>
+                            <constraint firstItem="oyl-CF-LVF" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="topMargin" constant="-10" id="NPE-Lj-KAA"/>
                             <constraint firstItem="rcy-D6-cqh" firstAttribute="top" secondItem="izx-ER-KCd" secondAttribute="bottom" id="QeF-ln-0X6"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ytv-FN-kCP" secondAttribute="trailing" constant="-20" id="a7h-ka-0qz"/>
                             <constraint firstItem="ytv-FN-kCP" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="rK0-f6-RBj"/>
                             <constraint firstItem="rcy-D6-cqh" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="-20" id="tC7-bP-HPy"/>
                             <constraint firstAttribute="trailingMargin" secondItem="rcy-D6-cqh" secondAttribute="trailing" constant="-20" id="vRM-wl-Xkf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="oyl-CF-LVF" secondAttribute="trailing" constant="-20" id="zJm-Od-YFL"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <navigationItem key="navigationItem" title="Movies" id="tAb-M6-XlH"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="lightContent"/>
                     <connections>
+                        <outlet property="NetworkErr" destination="oyl-CF-LVF" id="YNd-JF-gUY"/>
                         <outlet property="collectionView" destination="ytv-FN-kCP" id="I8b-fX-ekL"/>
                         <outlet property="searchBar" destination="rcy-D6-cqh" id="Bkf-84-p6N"/>
                     </connections>

@@ -10,15 +10,16 @@ import UIKit
 import AFNetworking
 import SOTProgressHUD
 
+
 class MoviesViewController: UIViewController, UISearchBarDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var NetworkErr: UIView!
     var movies: [NSDictionary]?
     var filteredMovies: [NSDictionary]?
     var endpoint:String = ""
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        
         //LightContent
         return UIStatusBarStyle.LightContent
     }
@@ -30,20 +31,16 @@ class MoviesViewController: UIViewController, UISearchBarDelegate, UICollectionV
         collectionView.dataSource = self
         collectionView.delegate = self
         searchBar.delegate = self
-        
-        
-        
-        
-        
-        
-        netRequest()
-        
-        // Do any additional setup after loading the view.
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: "refreshControlAction:", forControlEvents: UIControlEvents.ValueChanged)
         collectionView.insertSubview(refreshControl, atIndex: 0)
         
-        
+        if isConnectedToNetwork() {
+            NetworkErr.hidden = true
+            netRequest()
+        }else{
+            NetworkErr.hidden = false
+        }
         
     }
     
@@ -51,14 +48,28 @@ class MoviesViewController: UIViewController, UISearchBarDelegate, UICollectionV
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    func isConnectedToNetwork() -> Bool {
+        var zeroAddress = sockaddr_in()
+        zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
+        zeroAddress.sin_family = sa_family_t(AF_INET)
+        let defaultRouteReachability = withUnsafePointer(&zeroAddress) {
+            SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0))
+        }
+        var flags = SCNetworkReachabilityFlags()
+        if !SCNetworkReachabilityGetFlags(defaultRouteReachability!, &flags) {
+            return false
+        }
+        let isReachable = (flags.rawValue & UInt32(kSCNetworkFlagsReachable)) != 0
+        let needsConnection = (flags.rawValue & UInt32(kSCNetworkFlagsConnectionRequired)) != 0
+        return (isReachable && !needsConnection)
+    }
     
-        
     func refreshControlAction(refreshControl: UIRefreshControl) {
-       //do!
+
         netRequest()
         refreshControl.endRefreshing()
-    
     }
+    
     func netRequest (){
         SOTProgressHUD.sharedHUD.show(self.view)
         let apiKey = "a07e22bc18f5cb106bfe4cc1f83ad8ed"
@@ -85,9 +96,6 @@ class MoviesViewController: UIViewController, UISearchBarDelegate, UICollectionV
         
         task.resume()
     }
-    
-    
-    
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         searchBar.showsCancelButton = false
@@ -123,7 +131,9 @@ class MoviesViewController: UIViewController, UISearchBarDelegate, UICollectionV
         func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCellWithReuseIdentifier("postercell", forIndexPath: indexPath) as! ColorCell
             let movie = filteredMovies![indexPath.row]
-            
+            let backgroundView = UIView()
+            backgroundView.backgroundColor = UIColor.grayColor()
+            cell.selectedBackgroundView = backgroundView
             
             
             let posterBaseUrl = "http://image.tmdb.org/t/p/w500"

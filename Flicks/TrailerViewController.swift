@@ -16,7 +16,7 @@ class TrailerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Trailer"
-        print(link)
+        //print(link)
         moviePlayer.view.frame = view.frame
         view.addSubview(moviePlayer.view)
         moviePlayer.fullscreen = true

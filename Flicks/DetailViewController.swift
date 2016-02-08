@@ -24,7 +24,6 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var movieInfoView: UIView!
     @IBOutlet weak var genreLabel: UILabel!
     @IBOutlet weak var ratinglabel: UILabel!
-    
     var movies: NSDictionary!
     var generes: [NSDictionary]!
     var names: [Int]!
@@ -34,7 +33,7 @@ class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(movies)
+        //print(movies)
         genreRequest()
         let title = movies["title"] as? String
         self.title = title

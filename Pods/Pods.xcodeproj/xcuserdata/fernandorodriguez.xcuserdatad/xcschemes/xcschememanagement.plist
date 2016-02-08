@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ReachabilitySwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SOTProgressHUD-SOTProgressHUDAssets.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,27 +37,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>0D09D77505FDCBF17413FD48224EF529</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>1C3436CEA5C3D39764C5F54374794ECB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>609A1B0E02335B0104B68DE413169BCA</key>
+		<key>39EDCF9A34A09BE5168CA91079CCFE3A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8154BA46245885C82498A8FC1560F7F7</key>
+		<key>6E3BEA6C2587C4DE3EDB7BE548F65961</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>844CB56678CC1243EE87394CB6CF6A45</key>
+		<key>87EBD724FFB01B2D71A0C46EDA3F7370</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A0F87A2BEF127686A7729E38EAD80729</key>
+		<key>DEFB52A81C5403716699706D410253E1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
